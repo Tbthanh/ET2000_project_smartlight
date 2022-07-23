@@ -20,7 +20,7 @@ void loop()
   valb = analogRead(phoresPin);   //read photoresistor value
   if(lightState == LOW)
   {
-    if(valb<1000)
+    if(valb<500)
     {
       if(vala==HIGH)
       {
@@ -43,9 +43,25 @@ void loop()
   }
   else
   {
-    if(valb>1000) //dont know the real num of valb when light is on
+    if(valb>700) //dont know the real num of valb when light is on
     {
-        
+        delay(10000);
+        digitalWrite(relayPin, LOW);
+        lightState=LOW;
+    }
+    else
+    {
+        if(vala==HIGH)
+        {
+          digitalWrite(relayPin, HIGH);
+          lightState=HIGH; 
+        }  
+        else
+        {
+          delay(10000);
+          digitalWrite(relayPin, LOW);
+          lightState=LOW;  
+        }
     }  
   }
 
