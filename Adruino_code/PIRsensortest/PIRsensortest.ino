@@ -1,57 +1,53 @@
-int ledPin = 13;        // chọn chân 13 báo hiệu LED
-int inputPin = 3;       // chọn ngõ tín hiệu vào cho PIR
-int pirState = LOW;     // Bắt đầu với không có báo động
-int val = 0;
-//int pinSpeaker = 10;    //chọn chân cho chuông khi có đột nhập
+/**/
+const int relayPin = 13;        // relay pin is pin 13 on Arduino
+const int pirinPin = 3;       // PIR pin is 3 on Arduino
+const int phoresPin = 0;      //photoresistor pin is A0 on Arduino
+int lightState = LOW;     // start with light turn off
+int vala = 0;
+int valb = 0;
  
 void setup()
 {
-  pinMode(ledPin, OUTPUT);
-  pinMode(inputPin, INPUT);
-  //pinMode(pinSpeaker, OUTPUT);
+  pinMode(relayPin, OUTPUT);
+  pinMode(pirinPin, INPUT); //digital 0/1 (0V-3.3V)
+  pinMode(phoresPin,INPUT); //analoge of phores :(
   Serial.begin(9600);
 }
  
 void loop()
 {
-  val = digitalRead(inputPin);    // đọc giá trị đầu vào.
-  if (val == HIGH)                // nếu giá trị ở mức cao.(1)
+  vala = digitalRead(pirinPin);    // read PIR
+  valb = analogRead(phoresPin);   //read photoresistor value
+  if(lightState == LOW)
   {
-    digitalWrite(ledPin, HIGH); // LED On
-    //playTone(300, 160);         // thời gian chuông kêu
-    delay(150);
- 
-    if (pirState == LOW)
+    if(valb<1000)
     {
-      Serial.println("Motion detected!");
-      pirState = HIGH;
+      if(vala==HIGH)
+      {
+        digitalWrite(relayPin, HIGH);
+        lightState=HIGH; 
+      }  
+      else
+      {
+        delay(10000);
+        digitalWrite(relayPin, LOW);
+        lightState=LOW;  
+      }
     }
+    else
+    {
+      delay(10000);
+      digitalWrite(relayPin, LOW);
+      lightState=LOW;      
+    }  
   }
   else
   {
-    digitalWrite(ledPin, LOW);
-    //playTone(0, 0);
-    delay(300);
-    if (pirState == HIGH)
+    if(valb>1000) //dont know the real num of valb when light is on
     {
-      Serial.println("Motion ended!");
-      pirState = LOW;
-    }
+        
+    }  
   }
+
+  
 }
-/* 
-void playTone(long duration, int freq)
-{
-  duration *= 1000;
-  int period = (1.0 / freq) * 1000000;
-  long elapsed_time = 0;
-  while (elapsed_time < duration)
-  {
-    digitalWrite(pinSpeaker,HIGH);
-    delayMicroseconds(period / 2);
-    digitalWrite(pinSpeaker, LOW);
-    delayMicroseconds(period / 2);
-    elapsed_time += (period);
-  }
-}
-*/
