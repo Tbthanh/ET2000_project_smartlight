@@ -1,4 +1,9 @@
-/**/
+/*the lib can be found here:https://github.com/claws/BH1750
+ the project can be found here: https://github.com/Tbthanh/ET2000_project_smartlight
+ */
+
+#include <Wire.h> // adds I2C library 
+#include <BH1750.h> // adds BH1750 library file 
 const int relayPin = 13;        // relay pin is pin 13 on Arduino
 const int pirinPin = 3;       // PIR pin is 3 on Arduino
 const int phoresPin = 0;      // BH1750 pin is A0 on Arduino
