@@ -32,6 +32,8 @@ void loop()
   Serial.print("Light: ");
   Serial.print(valb);
   Serial.println(" lux");
+  Serial.print("|| motion:");
+  Serial.println(vala);
 
   //
   if(lightState == LOW) //light is off
@@ -42,8 +44,7 @@ void loop()
       {
         digitalWrite(relayPin, HIGH);
         lightState=HIGH; 
-        Serial.print("Light on");
-        delay(1000); 
+        Serial.println("Light on");
         //delay for the sensor sake. (I saw it in the guide hehe)
       }  
     }
@@ -52,9 +53,10 @@ void loop()
   {
     if(valb>270) //turn the light off when enviroment is bright enough
     {
-        delay(10000); // the delay is big enough for the sensor to not go heywild
+        delay(9700); // the delay is big enough for the sensor to not go heywild
         digitalWrite(relayPin, LOW);
         lightState=LOW;
+        Serial.println("Light off");
     }
     else
     {
@@ -62,16 +64,16 @@ void loop()
         {
           digitalWrite(relayPin, HIGH);
           lightState=HIGH;
-          delay(1000); 
           //delay for the sensor sake. (I saw it in the guide hehe)
         }  
         else
         {
-          delay(10000);
+          delay(9700);
           digitalWrite(relayPin, LOW);
           lightState=LOW;  
+          Serial.println("Light off");
         }
     }  
   }
-  
+  delay(300);
 }
