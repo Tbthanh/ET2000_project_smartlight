@@ -5,12 +5,10 @@
 #include <Wire.h> // adds I2C library 
 #include <BH1750.h> // adds BH1750 library file 
 
-
 const int relayPin = 13;        // relay pin is pin 13 on Arduino
 const int pirinPin = 3;       // PIR pin is 3 on Arduino
 int lightState = LOW;     // start with light turn off
 BH1750 lightMeter;
-
 
 void setup() //code in here only run once.
 {
@@ -21,9 +19,8 @@ void setup() //code in here only run once.
   // On esp8266 devices you can select SCL and SDA pins using Wire.begin(D4, D3);
   Wire.begin();
   lightMeter.begin();
-  Serial.println(F("Running..."));
+  Serial.println(F("BH1750 Test"));
 }
-
 
 void loop()
 {
@@ -31,11 +28,12 @@ void loop()
   // read PIR get HIGH or LOW
   uint16_t valb = lightMeter.readLightLevel();
   // Get Lux value in unasignint 2 bytes unsigned  0 to 65535
-  
-  //these serial.comand just for the sake of debugging :))
+  //print the valb to serial monitor/ for debugging only
   Serial.print("Light: ");
   Serial.print(valb);
   Serial.println(" lux");
+
+  //
   if(lightState == LOW) //light is off
   {
     if(valb<=120)
