@@ -6,7 +6,7 @@
 #include <BH1750.h> // adds BH1750 library file 
 
 const int relayPin = 13;        // relay pin is pin 13 on Arduino
-const int pirinPin = 3;       // PIR pin is 3 on Arduino
+const int pirinPin = 4;       // PIR pin is 3 on Arduino
 int lightState = LOW;     // start with light turn off
 BH1750 lightMeter;
 
@@ -38,7 +38,7 @@ void loop()
   //
   if(lightState == LOW) //light is off
   {
-    if(valb<=50)
+    if(valb<=100)
     {
       if(vala==HIGH)
       {
@@ -75,5 +75,5 @@ void loop()
         }
     }  
   }
-  delay(300);
+  delay(1000);
 }
