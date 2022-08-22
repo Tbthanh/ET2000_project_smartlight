@@ -38,7 +38,7 @@ void loop()
   //
   if(lightState == LOW) //light is off
   {
-    if(valb<=120)
+    if(valb<=50)
     {
       if(vala==HIGH)
       {
@@ -51,9 +51,9 @@ void loop()
   }
   else //Light is on
   {
-    if(valb>270) //turn the light off when enviroment is bright enough
+    if(valb>700) //turn the light off when enviroment is bright enough
     {
-        delay(9700); // the delay is big enough for the sensor to not go heywild
+        //delay(9700); // the delay is big enough for the sensor to not go heywild
         digitalWrite(relayPin, LOW);
         lightState=LOW;
         Serial.println("Light off");
@@ -68,8 +68,8 @@ void loop()
         }  
         else
         {
-          delay(9700);
-          digitalWrite(relayPin, LOW);
+          delay(1000);
+           digitalWrite(relayPin, LOW);
           lightState=LOW;  
           Serial.println("Light off");
         }
