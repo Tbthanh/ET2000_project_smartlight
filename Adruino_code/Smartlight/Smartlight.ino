@@ -5,7 +5,7 @@
 #include <Wire.h> // adds I2C library 
 #include <BH1750.h> // adds BH1750 library file 
 
-const int relayPin = 13;        // relay pin is pin 13 on Arduino
+const int relayPin = 10;        // relay pin is pin 13 on Arduino
 const int pirinPin = 4;       // PIR pin is 3 on Arduino
 int lightState = LOW;     // start with light turn off
 BH1750 lightMeter;
