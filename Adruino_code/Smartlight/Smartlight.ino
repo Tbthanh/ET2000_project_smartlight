@@ -5,14 +5,16 @@
 #include <Wire.h> // adds I2C library 
 #include <BH1750.h> // adds BH1750 library file 
 
-const int relayPin = 10;        // relay pin is pin 13 on Arduino
+const int relayPina = 10;        // relay pin is pin 13 on Arduino
+const int relayPinb = 9;
 const int pirinPin = 4;       // PIR pin is 3 on Arduino
 int lightState = LOW;     // start with light turn off
 BH1750 lightMeter;
 
 void setup() //code in here only run once.
 {
-  pinMode(relayPin, OUTPUT);
+  pinMode(relayPina, OUTPUT);
+  pinMode(relayPinb, OUTPUT);
   pinMode(pirinPin, INPUT); //digital LOW-HIGH (0V-3.3V)
   Serial.begin(9600);
   // Initialize the I2C bus (BH1750 library doesn't do this automatically)
@@ -42,7 +44,8 @@ void loop()
     {
       if(vala==HIGH)
       {
-        digitalWrite(relayPin, HIGH);
+        digitalWrite(relayPina, HIGH);
+        digitalWrite(relayPinb, HIGH);
         lightState=HIGH; 
         Serial.println("Light on");
         //delay for the sensor sake. (I saw it in the guide hehe)
@@ -54,7 +57,8 @@ void loop()
     if(valb>700) //turn the light off when enviroment is bright enough
     {
         //delay(9700); // the delay is big enough for the sensor to not go heywild
-        digitalWrite(relayPin, LOW);
+        digitalWrite(relayPina, LOW);
+        digitalWrite(relayPinb, LOW);
         lightState=LOW;
         Serial.println("Light off");
     }
@@ -62,14 +66,16 @@ void loop()
     {
         if(vala==HIGH)
         {
-          digitalWrite(relayPin, HIGH);
+          digitalWrite(relayPina, HIGH);
+          digitalWrite(relayPinb, HIGH);
           lightState=HIGH;
           //delay for the sensor sake. (I saw it in the guide hehe)
         }  
         else
         {
           delay(1000);
-           digitalWrite(relayPin, LOW);
+          digitalWrite(relayPina, LOW);
+          digitalWrite(relayPinb, LOW);
           lightState=LOW;  
           Serial.println("Light off");
         }
