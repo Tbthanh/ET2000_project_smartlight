@@ -21,7 +21,7 @@ void setup() //code in here only run once.
   // On esp8266 devices you can select SCL and SDA pins using Wire.begin(D4, D3);
   Wire.begin();
   lightMeter.begin();
-  Serial.println(F("BH1750 Test"));
+  Serial.println(F("Smartlight Test"));
 }
 
 void loop()
@@ -40,7 +40,7 @@ void loop()
   //
   if(lightState == LOW) //light is off
   {
-    if(valb<=100)
+    if(valb<=30)
     {
       if(vala==HIGH)
       {
@@ -54,7 +54,7 @@ void loop()
   }
   else //Light is on
   {
-    if(valb>700) //turn the light off when enviroment is bright enough
+    if(valb>280) //turn the light off when enviroment is bright enough
     {
         delay(8000); // the delay is big enough for the sensor to not go heywild
         digitalWrite(relayPina, LOW);
