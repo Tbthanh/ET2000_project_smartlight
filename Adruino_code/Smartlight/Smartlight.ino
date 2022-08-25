@@ -40,8 +40,8 @@ void loop()
   //
   if(lightState == LOW) //light is off
   {
-    if(valb<=30)
-    {
+    if(valb<=100)    
+      {
       if(vala==HIGH)
       {
         digitalWrite(relayPina, HIGH);
@@ -54,9 +54,9 @@ void loop()
   }
   else //Light is on
   {
-    if(valb>280) //turn the light off when enviroment is bright enough
+    if(valb>580) //turn the light off when enviroment is bright enough
     {
-        delay(8000); // the delay is big enough for the sensor to not go heywild
+        delay(1000); // the delay is big enough for the sensor to not go heywild
         digitalWrite(relayPina, LOW);
         digitalWrite(relayPinb, LOW);
         lightState=LOW;
@@ -73,7 +73,7 @@ void loop()
         }  
         else
         {
-          delay(8000);
+          delay(1000);
           digitalWrite(relayPina, LOW);
           digitalWrite(relayPinb, LOW);
           lightState=LOW;  
